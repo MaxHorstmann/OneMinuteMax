@@ -1,0 +1,10 @@
+version: "3"
+services:
+        web:
+                image: "microsoft/dotnet:sdk"
+                volumes:
+                        - .:/opt/code
+                stdin_open: true
+                tty: true
+                working_dir: /opt/code
+
