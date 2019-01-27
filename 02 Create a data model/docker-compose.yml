@@ -1,0 +1,20 @@
+version: "3"
+services:
+        sql:
+                image: "microsoft/mssql-server-linux"
+                container_name: crm_sql_1
+                ports:
+                        - "1433:1433"
+                environment:
+                        - ACCEPT_EULA=Y
+                        - MSSQL_PID=Express
+                        - SA_PASSWORD=Password!
+        redis:
+                image: "redis"
+                container_name: crm_redis_1
+                ports:
+                        - "6379:6379"
+        web:
+                container_name: crm_web_1
+                ports:
+                        - "80:80"
