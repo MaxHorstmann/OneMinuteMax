@@ -1,18 +1,4 @@
 
-01 Setting up your dev environment: Docker + MSSQL + Redis + .NET Core
+02 Setting up your app: ASP.NET MVC
 ====
-
-Watch on [YouTube](https://www.youtube.com/watch?v=UojA8A8-lwE)
-
-Prerequisites
-===
-* [Docker](https://docs.docker.com/install)
-
-Run
-===
-```
-$ docker-compose up -d
-```
-
-
 
