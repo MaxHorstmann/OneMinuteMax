@@ -21,6 +21,7 @@ $ apt-get -y install criu
 ```
 $ vim /etc/docker/daemon.json
 ```
+(see [daemon.json](daemon.json))
 
 * Restart Docker engine, confirm experimental mode enabled:
 
