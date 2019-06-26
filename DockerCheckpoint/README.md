@@ -13,7 +13,7 @@ $ cat /etc/os-release
 * Install [CRIU](https://criu.org):
 
 ```
-$ apt-get -y install criu   --“CRIU or Checkpoint/Restore In Userspace.”
+$ apt-get -y install criu
 ```
 
 * Enable experimental mode in Docker engine:
