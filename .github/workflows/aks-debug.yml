@@ -1,0 +1,17 @@
+name: AKS-Debug
+on: [push]
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v1
+      id: install
+    - name: Set AKS context
+      uses: azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AKS_CREDENTIALS }}'
+        resource-group: 'pr-builds'
+        cluster-name: 'pr-builds'
+    - name: debug
+      run: kubectl get nodes
+
