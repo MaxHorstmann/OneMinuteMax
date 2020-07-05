@@ -10,7 +10,7 @@ jobs:
       uses: docker/build-push-action@v1
       with:
         registry: docker.pkg.github.com
-        dockerfile: AspNetCoreApp5Minutes/web/Dockerfile
+        path: AspNetCoreApp5Minutes/web
         username: maxhorstmann
         password: ${{ secrets.GITHUB_TOKEN }}
         repository: maxhorstmann/oneminutemax/oneminutemax
