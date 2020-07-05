@@ -27,7 +27,7 @@ jobs:
         resource-group: 'pr-builds'
         cluster-name: 'pr-builds'
     - name: Deploy
-      run: helm install --wait --set image.tag=pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }} ./helm
+      run: helm install --wait --set image.tag=pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }} ./AspNetCoreApp5Minutes/helm
 
     - name: Fetch IP
       run: echo ::set-env name=PR_ENVIRONMENT_IP::$(kubectl get svc pr-${{ github.event.pull_request.number }} --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
