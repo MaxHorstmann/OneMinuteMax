@@ -11,7 +11,7 @@ jobs:
       with:
         registry: docker.pkg.github.com
         dockerfile: AspNetCoreApp5Minutes/web/Dockerfile
-        #username: ${{ secrets.DOCKERHUB_USERNAME }}
+        username: maxhorstmann
         password: ${{ secrets.GITHUB_TOKEN }}
         repository: maxhorstmann/oneminutemax/oneminutemax
         tags: pr-${{ github.event.pull_request.number }}
