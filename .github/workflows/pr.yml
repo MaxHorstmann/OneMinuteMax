@@ -15,26 +15,25 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         repository: maxhorstmann/oneminutemax/oneminutemax
         tags: pr-${{ github.event.pull_request.number }}
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v1
+      id: install
+    - name: Setup helm
+      uses: azure/setup-helm@v1
+    - name: Set AKS context
+      uses: azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AKS_CREDENTIALS }}'
+        resource-group: 'pr-builds'
+        cluster-name: 'pr-builds'
+    - name: Deploy
+      run: helm install --wait --set image.tag=pr-${{ github.event.pull_request.number }} pr-${{ github.event.pull_request.number }} ./helm
 
-    # - name: Setup kubectl
-    #   uses: azure/setup-kubectl@v1
-    #   id: install
-    # - name: Setup helm
-    #   uses: azure/setup-helm@v1
-    # - name: Set AKS context
-    #   uses: azure/aks-set-context@v1
-    #   with:
-    #     creds: '${{ secrets.AKS_CREDENTIALS }}'
-    #     resource-group: 'pr-builds'
-    #     cluster-name: 'rehglz-aks'
+    - name: Fetch IP
+      run: echo ::set-env name=PR_ENVIRONMENT_IP::$(kubectl get svc pr-${{ github.event.pull_request.number }} --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
 
-    #   run: helm install --wait --set image.tag=pr-${{ github.event.pull_request.number }} aksdeploytest-pr-${{ github.event.pull_request.number }} ./helm
-
-    # - name: Fetch IP
-    #   run: echo ::set-env name=PR_ENVIRONMENT_IP::$(kubectl get svc aksdeploytest-pr-${{ github.event.pull_request.number }} --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
-
-    # - name: Create comment
-    #   uses: peter-evans/create-or-update-comment@v1  # 3rd party - TODO build our own
-    #   with:
-    #     issue-number: ${{ github.event.pull_request.number }}
-    #     body: "Your PR Environment is here: http://${{ env.PR_ENVIRONMENT_IP }}"
+    - name: Create comment
+      uses: peter-evans/create-or-update-comment@v1  # 3rd party - TODO build our own
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body: "Your PR Environment is here: http://${{ env.PR_ENVIRONMENT_IP }}"
