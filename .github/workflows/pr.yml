@@ -9,11 +9,10 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v1
       with:
-        registry: docker.pkg.github.com
         path: AspNetCoreApp5Minutes/web
         username: maxhorstmann
-        password: ${{ secrets.GITHUB_TOKEN }}
-        repository: maxhorstmann/oneminutemax/oneminutemax
+        password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+        repository: maxhorstmann/oneminutemax
         tags: pr-${{ github.event.pull_request.number }}
     - name: Setup kubectl
       uses: azure/setup-kubectl@v1
