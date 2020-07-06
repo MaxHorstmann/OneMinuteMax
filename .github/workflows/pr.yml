@@ -12,7 +12,7 @@ jobs:
         path: AspNetCoreApp5Minutes/web
         username: maxhorstmann
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-        repository: maxhorstmann/oneminutemax
+        repository: maxhorstmann/crm
         tags: pr-${{ github.event.pull_request.number }}
     - name: Setup kubectl
       uses: azure/setup-kubectl@v1
