@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 style="color:red">All our customers!</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -45,8 +45,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalRevenue)
+            <td style="color:green">
+                $@Html.DisplayFor(modelItem => item.TotalRevenue)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
