@@ -35,4 +35,4 @@ jobs:
       uses: peter-evans/create-or-update-comment@v1  # 3rd party - TODO build our own
       with:
         issue-number: ${{ github.event.pull_request.number }}
-        body: "Your PR Environment is here: http://${{ env.PR_ENVIRONMENT_IP }}"
+        body: "Your PR Environment is here: http://${{ env.PR_ENVIRONMENT_IP }}/Customers"
