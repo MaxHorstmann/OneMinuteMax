@@ -31,27 +31,19 @@ spec:
         - name: {{ .Chart.Name }}-sql
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: microsoft/mssql-server-linux
+          image: mcr.microsoft.com/mssql/server
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: sql
-              containerPort: 1433
+            - name: mssql
+              containerPort: 1443
               protocol: TCP
           env:
-          - name: MSSQL_PID
-            value: "Express"
-          - name: ACCEPT_EULA
-            value: "Y"
-          - name: SA_PASSWORD
-            value: "Password!"
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: MSSQL_PID
+              value: "express"
+            - name: SA_PASSWORD
+              value: "Password!"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
