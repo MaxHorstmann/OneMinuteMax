@@ -37,7 +37,8 @@ namespace crm
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-	    var connectionString = "Data Source=sql;Initial Catalog=crm;User Id=sa;Password=Password!";
+        var sqlServer = Environment.GetEnvironmentVariable("SQL_SERVERNAME");
+	    var connectionString = $"Data Source={SQL_SERVERNAME};Initial Catalog=crm;User Id=sa;Password=Password!";
 	    services.AddDbContext<Context>(o => o.UseSqlServer(connectionString));
         }
 
