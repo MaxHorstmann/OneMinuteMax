@@ -10,7 +10,8 @@ spec:
 {{- end }}
   selector:
     matchLabels:
-      {{- include "helm.selectorLabels" . | nindent 6 }}-sql
+      {{- include "helm.selectorLabels" . | nindent 6 }}
+      {{ include "helm.fullname" . }}-sql
   template:
     metadata:
     {{- with .Values.podAnnotations }}
