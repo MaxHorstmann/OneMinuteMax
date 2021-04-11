@@ -67,28 +67,12 @@
                 "description": "Boolean flag to turn on and off of virtual machine scale sets"
             }
         },
-        "servicePrincipalClientId": {
-            "metadata": {
-                "description": "Client ID (used by cloudprovider)."
-            },
-            "type": "securestring"
-        },
-        "servicePrincipalClientSecret": {
-            "metadata": {
-                "description": "The Service Principal Client Secret."
-            },
-            "type": "securestring"
-        },
         "enablePrivateCluster": {
             "type": "bool",
             "defaultValue": false,
             "metadata": {
                 "description": "Enable private network access to the Kubernetes cluster."
             }
-        },
-        "aadSessionKey": {
-            "type": "securestring",
-            "defaultValue": ""
         },
         "enableHttpApplicationRouting": {
             "type": "bool",
@@ -120,7 +104,7 @@
                     {
                         "name": "agentpool",
                         "osDiskSizeGB": "[parameters('osDiskSizeGB')]",
-                        "count": 2,
+                        "count": 1,
                         "vmSize": "Standard_DS2_v2",
                         "osType": "Linux",
                         "storageProfile": "ManagedDisks",
@@ -138,11 +122,6 @@
                     "loadBalancerSku": "standard",
                     "networkPlugin": "[parameters('networkPlugin')]"
                 },
-                "servicePrincipalProfile": {
-                    "ClientId": "[parameters('servicePrincipalClientId')]",
-                    "Secret": "[parameters('servicePrincipalClientSecret')]",
-                    "aadSessionKey": "[parameters('aadSessionKey')]"
-                },
                 "apiServerAccessProfile": {
                     "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
                 },
@@ -155,7 +134,10 @@
                     }
                 }
             },
-            "tags": {}
+            "tags": {},
+            "identity": {
+                "type": "SystemAssigned"
+            }
         }
     ],
     "outputs": {

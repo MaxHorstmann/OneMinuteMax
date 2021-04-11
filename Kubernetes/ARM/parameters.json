@@ -18,19 +18,10 @@
             "value": "kubenet"
         },
         "enableRBAC": {
-            "value": true
-        },
-        "servicePrincipalClientId": {
-            "value": null
-        },
-        "servicePrincipalClientSecret": {
-            "value": null
+            "value": false
         },
         "enablePrivateCluster": {
             "value": false
-        },
-        "aadSessionKey": {
-            "value": null
         },
         "enableHttpApplicationRouting": {
             "value": false
