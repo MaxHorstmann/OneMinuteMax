@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev
+  labels:
+    service: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: dev
+  template:
+    metadata:
+      labels:
+        service: dev
+    spec:
+      containers:
+      - name: dev
+        image: mcr.microsoft.com/dotnet/sdk:latest
+        command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /code
+          name: code-volume
+      volumes:
+      - name: code-volume
+        hostPath:
+          path: /Users/maxhorstmann/code/OneMinuteMax/Loops
+          type: Directory
+             
+
