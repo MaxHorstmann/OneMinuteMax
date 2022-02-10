@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: sql
+	labels:
+		service: sql
+spec:
+	selector:
+		matchLabels:
+			service: sql
+	template:
+		metadata:
+			labels:
+				service: sql
+		spec:
+			containers:
+			- name: sql
+			  image: mcr.microsoft.com/mssql/server:latest
+			  ports:
+			  - containerPort: 1433
+			  env:
+			  - name: ACCEPT_EULA
+			    value: "Y"
+			  - name: MSSQL_PID
+			    value: "Developer"
+			  - name: SA_PASSWORD
+			    value: "Password1!"
+---
+apiVersion: v1
+kind: service
+metadata:
+	name: sql
+	labels:
+		service: sql
+spec:
+	selector:
+		service:sql
+	type: NodePort
+	ports:
+	- name: "SQL"
+	  port: 1433
+	  targetPort: 1433
+	  nodePort: 31000
+

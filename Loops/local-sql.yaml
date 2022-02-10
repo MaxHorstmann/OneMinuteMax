@@ -2,10 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sql
-  labels:
-    service: sql
 spec:
-  replicas: 1
   selector:
     matchLabels:
       service: sql
@@ -36,8 +33,10 @@ metadata:
 spec:
   selector:
     service: sql
+  type: NodePort
   ports:
   - name: "1433"
     port: 1433
     targetPort: 1433
+    nodePort: 31000
 
