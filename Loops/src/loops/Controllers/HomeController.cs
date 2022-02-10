@@ -15,7 +15,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var foo = new[] { "123", "abc", "sunshine" };
+        return View(foo);
     }
 
     public IActionResult Privacy()

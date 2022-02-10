@@ -1,5 +1,6 @@
 docker_build('loops-dev', \
 'src', dockerfile = 'src/Dockerfile.local', \
+ignore=["bin", "obj"], \
 live_update=[sync('./src', '/src')]
 )
 
