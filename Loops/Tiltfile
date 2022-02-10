@@ -1,0 +1,8 @@
+docker_build('loops-dev', \
+'src', dockerfile = 'src/Dockerfile.local', \
+live_update=[sync('./src', '/src')]
+)
+
+k8s_yaml("loops.yaml")
+k8s_resource('loops', port_forwards="5555:80")
+

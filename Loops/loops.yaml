@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prod
+  name: loops
   labels:
-    service: prod
+    service: loops
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: prod
+      service: loops
   template:
     metadata:
       labels:
-        service: prod
+        service: loops
     spec:
       containers:
-      - name: prod
-        image: maxhorstmann/loops:latest
+      - name: loops
+        image: loops-dev
         ports:
         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: prod
+  name: loops
   labels:
-    service: prod
+    service: loops
 spec:
   selector:
     service: prod
