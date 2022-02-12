@@ -1,8 +1,12 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0
 
-RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get update && apt-get install -y openssh-server unzip
 RUN sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 RUN echo "root:Abcd1234" | chpasswd
+
+RUN wget https://download.jetbrains.com/resharper/dotUltimate.2021.3.2/JetBrains.Rider.RemoteDebuggerUploads.linux-x64.2021.3.2.zip
+RUN mkdir -p /root/.local/share/JetBrains/RiderRemoteDebugger/2021.3.3
+RUN unzip -n -d /root/.local/share/JetBrains/RiderRemoteDebugger/2021.3.3 JetBrains.Rider.RemoteDebuggerUploads.linux-x64.2021.3.2.zip 
 
 WORKDIR /src
 COPY . /src
