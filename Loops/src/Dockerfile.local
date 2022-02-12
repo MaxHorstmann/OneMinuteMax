@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0
+FROM mcr.microsoft.com/dotnet/sdk:6.0.102
 
 RUN apt-get update && apt-get install -y openssh-server unzip
 RUN sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
@@ -10,5 +10,6 @@ RUN unzip -n -d /root/.local/share/JetBrains/RiderRemoteDebugger/2021.3.3 JetBra
 
 WORKDIR /src
 COPY . /src
+ENV DOTNET_WATCH_RESTART_ON_RUDE_EDIT=1
 ENV ASPNETCORE_URLS=http://0.0.0.0:80
 ENTRYPOINT ["/bin/sh", "-c" , "/etc/init.d/ssh start && dotnet watch run --project loops"]
