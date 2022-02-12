@@ -1,7 +1,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0
 WORKDIR /src
 COPY . /src
-#RUN apt-get update && apt-get install -y nodejs openssh-server
-#RUN sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
-#RUN /etc/init.d/ssh start
-ENTRYPOINT dotnet watch run --project loops --urls http://0.0.0.0:80
+RUN apt-get update && apt-get install -y nodejs openssh-server
+RUN sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+RUN echo "root:Abcd1234" | chpasswd
+RUN /etc/init.d/ssh start
+ENV ASPNETCORE_URLS=http://0.0.0.0:80
+ENTRYPOINT ["/bin/sh", "-c" , "/etc/init.d/ssh start && dotnet watch run --project loops"]
