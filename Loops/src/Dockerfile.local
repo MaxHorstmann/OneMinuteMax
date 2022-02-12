@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0
 
-RUN apt-get update && apt-get install -y nodejs openssh-server
+RUN apt-get update && apt-get install -y openssh-server
 RUN sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 RUN echo "root:Abcd1234" | chpasswd
 
