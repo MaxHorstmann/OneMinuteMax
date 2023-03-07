@@ -15,7 +15,7 @@ jobs:
         repository: maxhorstmann/crm
         tags: pr-${{ github.event.pull_request.number }}
     - name: Setup kubectl
-      uses: azure/setup-kubectl@v1
+      uses: azure/setup-kubectl@v3
       id: install
     - name: Setup helm
       uses: azure/setup-helm@v1
